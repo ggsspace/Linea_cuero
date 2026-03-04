@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/navbar/NavBar.jsx";
 import Home from "./pages/home/Home.jsx";
@@ -10,7 +10,7 @@ import Cart from "./pages/cart/Cart.jsx";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <NavBar />
       
       <Routes>
@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 

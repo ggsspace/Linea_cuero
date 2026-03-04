@@ -21,16 +21,16 @@ const NavBar = () => {
           <li><NavLink to="/productos">Productos</NavLink></li>
           <li><NavLink to="/calendario">Calendario</NavLink></li>
           <li><NavLink to="/qa">Q&A</NavLink></li>
-          <li><NavLink to="/cart">Carrito</NavLink></li>
         </ul>
 
         <div className="navbar-icons">
           <NavLink to="/login" className="icon-btn">
             <img src={loginIcon} alt="Login" className="nav-icon-img" />
           </NavLink>
-          <div className="icon-btn">
+          <NavLink to="/cart" className="icon-btn">
             <img src={carritoIcon} alt="Carrito" className="nav-icon-img" />
-          </div>
+          </NavLink>
+
         </div>
       </div>
     </nav>
