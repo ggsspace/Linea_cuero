@@ -1,0 +1,80 @@
+.hero-content {
+  max-width: 850px;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  color: white;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.hero-highlight {
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  -webkit-background-clip: text; /* Para Chrome y Safari */
+  background-clip: text;         /* Propiedad estándar (esto quita el aviso) */
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  max-width: 700px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.hero-cta-btn {
+  width: fit-content;
+  margin-top: 15px;
+  padding: 16px 35px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.25);
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.4);
+  filter: brightness(1.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content {
+    padding: 40px 20px;
+    text-align: center;
+    align-items: center;
+  }
+}
+
