@@ -1,5 +1,12 @@
-const LogIn = () => {
-  return <h1>Iniciar Sesión</h1>;
-};
+import react from "react";
+import "./LogIn.css";
 
-export default LogIn
+const LogIn = () => {
+  return (
+    <main>
+      <h1>LogIn</h1>
+
+    </main>
+  );
+};
+export default LogIn;

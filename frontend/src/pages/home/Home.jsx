@@ -1,9 +1,10 @@
 import "./Home.css";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   return (
-
-    <section className="hero-content">
+    <main>
+      <section className="hero-content">
         <h1 className="hero-title">
           Innovación que se viste: El <span className="hero-highlight">talento</span> del CDMC en <span className="hero-highlight">tus manos</span>
         </h1>
@@ -15,11 +16,16 @@ const Home = () => {
           el resultado de la excelencia técnica y la pasión de nuestros aprendices.
         </p>
 
-        <button className="hero-cta-btn">Explorar Productos</button>
+
+        <NavLink to="/products">
+          <button className="hero-cta-btn">Explorar Productos</button>
+        </NavLink>
+        
       </section>
 
+    </main>
   );
 };
 
-export default Home
+export default Home;
 
