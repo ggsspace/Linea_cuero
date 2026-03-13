@@ -4,9 +4,15 @@ import "./LogIn.css";
 const LogIn = () => {
   return (
     <main>
-      <h1>LogIn</h1>
+      <section >
+        <div className="login-container">
+          <h1>Iniciar Sesión</h1>
+        </div>
+        
+      </section>
 
     </main>
   );
 };
 export default LogIn;
+
