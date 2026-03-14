@@ -1,3 +1,4 @@
+
 const productos = [
   {
     id: 1,
@@ -21,5 +22,17 @@ const productos = [
     imagen: "https://via.placeholder.com/300"
   }
 ];
+
+import React from "react";
+import "./Products.css";
+
+const Products = () => {
+  return (
+    <main>
+      <h1>Productos</h1>
+    </main>
+  );
+};
+
 
 export default productos; 
