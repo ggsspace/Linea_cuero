@@ -1,10 +1,11 @@
 import "./Home.css";
+import { NavLink } from "react-router-dom";
 import Card from "../../components/card/Card.jsx";
 import productos from "../products/Products";
+
 const Home = () => {
   return (
-    <>
-      {/* Sección hero */}
+    <main>
       <section className="hero-content">
         <h1 className="hero-title">
           Innovación que se viste: El <span className="hero-highlight">talento</span> del CDMC en <span className="hero-highlight">tus manos</span>
@@ -18,7 +19,6 @@ const Home = () => {
         <button className="hero-cta-btn">Explorar Productos</button>
       </section>
 
-      {/* Sección de cards */}
       <section className="productos-section">
         <h2 className="productos-titulo">Nuestros Productos</h2>
         <div className="cards-container">
@@ -27,7 +27,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-    </>
+    </main>
   );
 };
 
