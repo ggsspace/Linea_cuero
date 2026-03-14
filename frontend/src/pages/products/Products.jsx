@@ -1,25 +1,20 @@
-const productos = [
-  {
-    id: 1,
-    titulo: "Producto 1",
-    descripcion: "Descripción del producto",
-    precio: "$10.000",
-    imagen: "https://via.placeholder.com/300"
-  },
-  {
-    id: 2,
-    titulo: "Producto 2",
-    descripcion: "Descripción del producto",
-    precio: "$20.000",
-    imagen: "https://via.placeholder.com/300"
-  },
-  {
-    id: 3,
-    titulo: "Producto 3",
-    descripcion: "Descripción del producto",
-    precio: "$30.000",
-    imagen: "https://via.placeholder.com/300"
-  }
-];
+import Card from "../../components/card/Card.jsx";
+import productos from "./Products.js"; 
+import "./Products.css";
 
-export default productos; 
+const Products = () => {
+  return (
+    <main>
+      <section className="productos-section">
+        <h2 className="productos-titulo">Nuestros Productos</h2>
+        <div className="cards-container">
+          {productos.map((producto) => (
+            <Card key={producto.id} {...producto} />
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Products;
