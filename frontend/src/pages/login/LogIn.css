@@ -1,0 +1,124 @@
+.login-container {
+  min-height: 100vh;
+  background-color: #0f172a; /* Color oscuro base de tu proyecto */
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-logo img {
+  width: 50px;
+  filter: brightness(0) invert(1);
+}
+
+.login-logo h1 { font-size: 1.5rem; margin: 0; line-height: 1; }
+.login-logo p { margin: 0; color: #cbd5e1; font-size: 0.9rem; }
+
+.login-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-grow: 1;
+}
+
+/* Selector de Rol - Lado Izquierdo */
+.role-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(30, 41, 59, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #7e22ce;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 25px;
+  background: #334155;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  min-width: 250px;
+  border: 2px solid transparent;
+}
+
+.role-option.active {
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  border-color: #a855f7;
+}
+
+.role-icon {
+  background: #0f172a;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Formulario - Lado Derecho */
+.login-card {
+  background: rgba(30, 41, 59, 0.5);
+  padding: 50px;
+  border-radius: 30px;
+  border: 1px solid #7e22ce;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.login-form-box h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: white;
+}
+
+.btn-ingresar {
+  width: fit-content;
+  padding: 10px 40px;
+  background: linear-gradient(135deg, #a855f7 0%, #d8b4fe 100%);
+  border: none;
+  border-radius: 20px;
+  color: #ccd6ee;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: 0.3s;
+}
+
+.btn-ingresar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+}
+
+.login-footer-links p { font-size: 0.9rem; color: #94a3b8; }
+.login-footer-links a { color: #a855f7; text-decoration: none; }
+.forgot-link { font-size: 0.8rem; display: block; margin-top: 10px; }

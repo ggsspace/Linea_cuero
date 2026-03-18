@@ -19,7 +19,10 @@ const Home = () => {
           el resultado de la excelencia técnica y la pasión de nuestros aprendices.
         </p>
 
+        
+        <NavLink to = "/products">
         <button className="hero-cta-btn">Explorar Productos</button>
+        </NavLink>
       </section>
 
       

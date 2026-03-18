@@ -23,6 +23,11 @@
   align-items: center;
 }
 
+.home-shortcut-btn {
+  background-color: #0f172a;
+  height: 83px;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
