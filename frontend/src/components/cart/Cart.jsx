@@ -15,6 +15,5 @@ function Cart({imagen, titulo, descripcion, precio}) {
             </div>
     );
     }
-
-    export default Cart;
-        
+export default Cart;
+   

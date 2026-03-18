@@ -40,6 +40,8 @@ const NavBar = () => {
             <img src={carritoIcon} alt="Carrito" className="nav-icon-img" />
           </NavLink>
 
+          
+
         </div>
       </div>
     </nav>
