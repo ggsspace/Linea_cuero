@@ -1,8 +1,6 @@
 import "./Home.css";
 import { NavLink } from "react-router-dom";
 
-
-
 import Cart from "../../components/cart/Cart.jsx";
 import productos from "../products/Products";
 
@@ -50,7 +48,7 @@ const Home = () => {
 
 
 
-    </main>
+    </main >
       
 
     
