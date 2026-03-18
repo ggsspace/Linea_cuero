@@ -5,6 +5,7 @@ import Cart from "../../components/cart/Cart.jsx";
 import Products from "../products/Products";
 
 
+
 const Home = () => {
   return (
     <main>
@@ -19,12 +20,40 @@ const Home = () => {
           el resultado de la excelencia técnica y la pasión de nuestros aprendices.
         </p>
 
+
         
         <NavLink to = "/products">
+
+        <NavLink to="/productos">
+          <button className="hero-cta-btn">Explorar Productos</button>
+        </NavLink>
+      </section>
+
+
         <button className="hero-cta-btn">Explorar Productos</button>
         </NavLink>
       </section>
 
+      <section className="productos-section">
+        <h2 className="productos-titulo">Nuestros Productos</h2>
+        <div className="cards-container">
+          {productos.map((producto) => (
+            <Card key={producto.id} {...producto} />
+          ))}
+        </div>
+      </section>
+
+
+
+      <section>
+          <NavLink to="/products">
+            <button className="hero-cta-btn">Explorar Productos</button>
+          </NavLink>
+      </section>
+
+
+
+    </main >
       
 
     </main>
@@ -33,6 +62,4 @@ const Home = () => {
   );
 };
 
-
 export default Home;
-
