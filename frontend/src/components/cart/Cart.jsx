@@ -1,3 +1,5 @@
+import "./Cart.css";
+
 function Cart({imagen, titulo, descripcion, precio}) {
     return (
         <div className="cart">

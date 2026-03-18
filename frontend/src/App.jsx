@@ -6,7 +6,7 @@ import Products from "./pages/products/Products.jsx";
 import Calendar from "./pages/calendar/Calendar.jsx";
 import QA from "./pages/qa/QA.jsx";
 import LogIn from "./pages/login/LogIn.jsx";
-import Cart from "./pages/cart/Cart.jsx";
+import Cart from "./components/cart/Cart.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import Events from "./pages/events/Events.jsx";
 
