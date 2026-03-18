@@ -1,9 +1,6 @@
 import "./Home.css";
 import { NavLink } from "react-router-dom";
 
-import Products from "../products/Products.jsx";
-
-
 const Home = () => {
   return (
     <main>
@@ -17,20 +14,12 @@ const Home = () => {
           marroquinería de autor y prendas con sello de innovación. Cada pieza es 
           el resultado de la excelencia técnica y la pasión de nuestros aprendices.
         </p>
-
-        
-        <NavLink to = "/products">
-        <button className="hero-cta-btn">Explorar Productos</button>
+        <NavLink to="/productos">
+          <button className="hero-cta-btn">Explorar Productos</button>
         </NavLink>
       </section>
-
-      
-
     </main>
-    
-    
   );
 };
-
 
 export default Home;

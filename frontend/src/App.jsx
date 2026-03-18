@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import NavBar from "./components/navbar/NavBar.jsx";
 import Home from "./pages/home/Home.jsx";
 import Products from "./pages/products/Products.jsx";
@@ -16,7 +15,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/productos" element={<Products />} />
+        <Route path="/productos" element={<Products />} />  {/* ← esta */}
         <Route path="/calendario" element={<Calendar />} />
         <Route path="/qa" element={<QA />} />
         <Route path="/login" element={<LogIn />} />
