@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Card from "../../components/card/Card.jsx";
 import productos from "./Products.js"; 
 import "./Products.css";
@@ -18,3 +19,20 @@ const Products = () => {
 };
 
 export default Products;
+=======
+import react from "react";
+import "./Products.css";
+
+const  Products = () => {
+  return (
+    <main>
+      <h1>Productos</h1>
+
+    </main>
+  );
+};
+export default Products;
+
+
+
+>>>>>>> dd166d1ab92abb87eac3c5e9c25288db4980fe45

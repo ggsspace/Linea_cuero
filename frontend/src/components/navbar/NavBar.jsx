@@ -8,13 +8,22 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-logo">
+        
+        <NavLink to = "/">
+        <button className="home-shortcut-btn">
+          <div className="navbar-logo">
           <img src={senaLogo} alt="SENA" className="logo-img" />
           <div className="logo-text">
             <span className="logo-title">SENA</span>
             <span className="logo-subtitle">CDMC</span>
           </div>
         </div>
+        
+        </button>
+        
+        </NavLink>
+        
+        
 
         <ul className="navbar-links">
           <li><NavLink to="/" end>Inicio</NavLink></li>
@@ -30,6 +39,8 @@ const NavBar = () => {
           <NavLink to="/cart" className="icon-btn">
             <img src={carritoIcon} alt="Carrito" className="nav-icon-img" />
           </NavLink>
+
+          
 
         </div>
       </div>

@@ -1,5 +1,15 @@
-const QA = () => {
-  return <h1>Q&A</h1>;
-};
+import react from "react";
+import "./QA.css";
 
-export default QA
+const  QA = () => {
+  return (
+    <main>
+      <h1>Q&A</h1>
+
+    </main>
+  );
+};
+export default QA;
+
+
+

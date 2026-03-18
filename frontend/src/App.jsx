@@ -6,6 +6,8 @@ import Calendar from "./pages/calendar/Calendar.jsx";
 import QA from "./pages/qa/QA.jsx";
 import LogIn from "./pages/login/LogIn.jsx";
 import Cart from "./pages/cart/Cart.jsx";
+import SignUp from "./pages/signup/SignUp.jsx";
+import Events from "./pages/events/Events.jsx";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/qa" element={<QA />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/events" element={<Events />} />
       </Routes>
     </BrowserRouter>
   );

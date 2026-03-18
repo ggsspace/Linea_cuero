@@ -13,10 +13,17 @@
   padding: 0 50px;
   color: white;
   font-family: sans-serif;
+<<<<<<< HEAD
   border-bottom: 1px solid #1e293b;
    position: sticky;        
   top: 0;                  
   z-index: 1000;   
+=======
+  border-bottom: 1px solid #1e293b; 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+>>>>>>> dd166d1ab92abb87eac3c5e9c25288db4980fe45
 }
 
 .navbar-container {
@@ -24,6 +31,11 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+}
+
+.home-shortcut-btn {
+  background-color: #0f172a;
+  height: 83px;
 }
 
 .navbar-logo {
@@ -110,3 +122,4 @@
   height: 60px;
   object-fit: contain;
 }
+

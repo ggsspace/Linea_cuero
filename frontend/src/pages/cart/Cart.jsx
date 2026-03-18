@@ -1,5 +1,15 @@
-const Cart = () => {
-  return <h1>Carrito</h1>;
-};
+import react from "react";
+import "./Cart.css";
 
-export default Cart
+const  Cart = () => {
+  return (
+    <main>
+      <h1>Carrito</h1>
+
+    </main>
+  );
+};
+export default Cart;
+
+
+
