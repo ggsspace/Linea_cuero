@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
-// Importamos la imagen correctamente desde assets
+
 import icon from "../../assets/login.png"; 
 
 const LogIn = () => {
@@ -37,14 +37,12 @@ const LogIn = () => {
             onClick={() => setRole("vendedor")}
           >
             <div className="role-icon-bg">
-              {/* CORRECCIÓN: También usamos 'icon' aquí en lugar de la ruta de texto */}
               <img src={icon} alt="Vendedor" className="role-img" />
             </div>
             <span>Vendedor</span>
           </div>
         </div>
 
-        {/* SECTOR DERECHO: Formulario */}
         <div className="login-form-container">
           <form className="login-form-card" onSubmit={handleLogin}>
             <h2>Iniciar Sesión</h2>
