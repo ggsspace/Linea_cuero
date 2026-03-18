@@ -1,7 +1,7 @@
 import "./Home.css";
 import { NavLink } from "react-router-dom";
 
-import Card from "../../components/card/Card.jsx";
+import Cart from "../../components/cart/Cart.jsx";
 import productos from "../products/Products";
 
 
@@ -33,13 +33,17 @@ const Home = () => {
 
 
 
-        <NavLink to="/products">
-          <button className="hero-cta-btn">Explorar Productos</button>
-        </NavLink>
-        
+      <section>
+          <NavLink to="/products">
+            <button className="hero-cta-btn">Explorar Productos</button>
+          </NavLink>
       </section>
 
+
     </main>
+      
+
+    
   );
 };
 

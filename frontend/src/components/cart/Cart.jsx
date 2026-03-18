@@ -1,8 +1,8 @@
-function Card({imagen, titulo, descripcion, precio}) {
+function Cart({imagen, titulo, descripcion, precio}) {
     return (
-        <div className="card">
+        <div className="cart">
             <img src={imagen} alt="imagen" />
-            <div className="card-body">
+            <div className="cart-body">
                     <h3>{titulo}</h3>
                     <p>{descripcion}</p>
                     <span>{precio}</span>
@@ -14,5 +14,5 @@ function Card({imagen, titulo, descripcion, precio}) {
     );
     }
 
-    export default Card;
+    export default Cart;
         
