@@ -25,9 +25,6 @@ const Home = () => {
       <section className="productos-section">
         <h2 className="productos-titulo">Nuestros Productos</h2>
         <div className="cards-container">
-          {productos.map((producto) => (
-            <Card key={producto.id} {...producto} />
-          ))}
         </div>
       </section>
 
@@ -37,7 +34,7 @@ const Home = () => {
           <button className="hero-cta-btn">Explorar Productos</button>
         </NavLink>
         
-      </section>
+     
 
     </main>
   );
