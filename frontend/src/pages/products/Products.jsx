@@ -1,16 +1,45 @@
-<<<<<<< HEAD
-import Card from "../../components/card/Card.jsx";
-import productos from "./Products.js"; 
 import "./Products.css";
+
+const productsData = [
+  {
+    id: 1,
+    title: "Product 1",
+    description: "Product description",
+    price: "$10.000",
+    image: "https://via.placeholder.com/300"
+  },
+  {
+    id: 2,
+    title: "Product 2",
+    description: "Product description",
+    price: "$20.000",
+    image: "https://via.placeholder.com/300"
+  },
+  {
+    id: 3,
+    title: "Product 3",
+    description: "Product description",
+    price: "$30.000",
+    image: "https://via.placeholder.com/300"
+  }
+];
 
 const Products = () => {
   return (
     <main>
-      <section className="productos-section">
-        <h2 className="productos-titulo">Nuestros Productos</h2>
+      <section className="products-section">
+        <h2 className="products-title">Nuestros Productos</h2>
         <div className="cards-container">
-          {productos.map((producto) => (
-            <Card key={producto.id} {...producto} />
+          {productsData.map((product) => (
+            <div className="card" key={product.id}>
+              <img src={product.image} alt={product.title} />
+              <div className="card-body">
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+                <span>{product.price}</span>
+                <button>Comprar</button>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -19,20 +48,3 @@ const Products = () => {
 };
 
 export default Products;
-=======
-import react from "react";
-import "./Products.css";
-
-const  Products = () => {
-  return (
-    <main>
-      <h1>Productos</h1>
-
-    </main>
-  );
-};
-export default Products;
-
-
-
->>>>>>> dd166d1ab92abb87eac3c5e9c25288db4980fe45
