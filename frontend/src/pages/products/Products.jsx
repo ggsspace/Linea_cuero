@@ -1,4 +1,5 @@
 import "./Products.css";
+import { useCart } from "../../context/CartContext.jsx"; // Conecta el carrito al componente
 
 const productsData = [
   {
@@ -25,6 +26,8 @@ const productsData = [
 ];
 
 const Products = () => {
+  const { addToCart } = useCart();
+
   return (
     <main>
       <section className="products-section">
@@ -37,7 +40,7 @@ const Products = () => {
                 <h3>{product.title}</h3>
                 <p>{product.description}</p>
                 <span>{product.price}</span>
-                <button>Comprar</button>
+                <button onClick={() => addToCart(product)}>Comprar</button>
               </div>
             </div>
           ))}
