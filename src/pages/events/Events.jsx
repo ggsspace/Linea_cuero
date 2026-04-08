@@ -1,7 +1,5 @@
 import React from "react";
-import "./Events.css";
-
-
+import "./Events.css"
 
 const Events = () => {
   return (
