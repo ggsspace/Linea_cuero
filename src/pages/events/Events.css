@@ -1,0 +1,77 @@
+/* Contenedor de la cuadrícula */
+.events-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* La tarjeta individual con tamaño fijo */
+.event-card {
+  /* Ancho fijo para que quepan 3 por fila */
+  flex: 0 0 calc(33.333% - 20px); 
+  
+  /* ALTURA FIJA: Esto es lo más importante */
+  height: 220px; 
+  
+  border: 1.5px solid #a855f7;
+  border-radius: 15px;
+  overflow: hidden; /* Corta cualquier parte de la imagen que sobresalga */
+  background: #1e293b;
+  position: relative;
+}
+
+/* Reglas estrictas para la imagen dentro de la tarjeta */
+.event-card img {
+  width: 100%;
+  height: 100%;    /* Obliga a la imagen a llenar toda la tarjeta */
+  
+  /* EL TRUCO MÁGICO: object-fit cover */
+  /* Esto hace que la imagen se recorte para llenar el espacio sin deformarse */
+  object-fit: cover; 
+  
+  display: block;
+}
+
+/* Título de la página */
+.events-title {
+  text-align: left;
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  margin-left: 170px;
+}
+
+
+.event-card:hover {
+  /* Elevación y escalado ligero (se agranda un 5%) */
+  transform: translateY(-8px) scale(1.05); 
+  
+  /* Resplandor Neón Morado Intenso (Box Shadow) */
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.7); 
+  
+  /* El borde se vuelve más brillante */
+  border-color: #d8b4fe; 
+  
+  /* Sube el z-index para que se superponga ligeramente a los vecinos si es necesario */
+  z-index: 10; 
+}
+
+.event-card {
+  /* ... tus otras reglas ... */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1; /* Posición normal */
+}
+
+.event-card:hover {
+  /* Bajamos el scale de 1.05 a 1.03 para que sea más sutil */
+  transform: translateY(-10px) scale(1.03); 
+  
+  /* IMPORTANTE: Esto hace que la tarjeta flotante esté por encima de las demás */
+  z-index: 10; 
+  
+  box-shadow: 0 15px 30px rgba(168, 85, 247, 0.5);
+}
