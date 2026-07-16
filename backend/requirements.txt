@@ -1,0 +1,7 @@
+pip install fastapi "uvicorn[standard]" sqlalchemy psycopg2-binary alembic
+
+pip install pydantic-settings bcrypt pyjwt python-multipart
+
+pip install qrcode[pil] fastapi-mail apscheduler
+
+pip install pytest httpx pytest-asyncio
