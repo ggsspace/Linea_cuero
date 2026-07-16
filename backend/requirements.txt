@@ -5,3 +5,5 @@ pip install pydantic-settings bcrypt pyjwt python-multipart
 pip install qrcode[pil] fastapi-mail apscheduler
 
 pip install pytest httpx pytest-asyncio
+
+pip install "python-jose[cryptography]" "passlib[bcrypt]"

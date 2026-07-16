@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from config.database import engine, Base
+from backend.app.core.database import engine, Base
 
 # Importar los modelos (se deben importar para que Base detecte las tablas al arrancar)
 # Cuando tus compañeros los creen, solo los importas aquí:
