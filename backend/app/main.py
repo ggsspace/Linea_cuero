@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.core.database import engine, Base
+from app.core.database import engine, Base
 
 # Importar los modelos (se deben importar para que Base detecte las tablas al arrancar)
-# Cuando tus compañeros los creen, solo los importas aquí:
-# from models import user, event, product 
+from app.api.routes import auth, usuarios
 
-# Inicializar/Crear las tablas en PostgreSQL si aún no existen
+
+
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -32,10 +33,13 @@ def read_root():
         "message": "Estructura base de Línea Cuero lista y funcionando."
     }
 
-# --- REGISTRO DE ENRUTADORES VACÍOS ---
-# Tus compañeros solo deberán crear sus archivos de rutas y descomentar estas líneas:
+
+from app.routes import auth, usuarios
+app.include_router(auth.router, tags=["Autenticación"])
+app.include_router(usuarios.router, tags=["Usuarios"])
+
+#  solo deberá crear archivos de rutas y descomentar estas líneas:
 #
-# from routes import auth, events, products
-# app.include_router(auth.router, prefix="/api/auth", tags=["Autenticación"])
+# from app.routes import events, products
 # app.include_router(events.router, prefix="/api/events", tags=["Stands y Eventos"])
 # app.include_router(products.router, prefix="/api/products", tags=["Catálogo"])

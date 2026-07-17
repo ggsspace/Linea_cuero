@@ -1,47 +1,36 @@
-import os
-import jwt
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
-from dotenv import load_dotenv
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+ 
+from app.core.database import get_db
+from app.schemas.usuario import UsuarioCreate, UsuarioLogin, UsuarioResponse, TokenResponse
+from app.services import auth_service
 
-load_dotenv()
+router = APIRouter(prefix="/api/auth", tags=["auth"])
 
-JWT_SECRET = os.getenv("JWT_SECRET", "mi-clave-secreta-de-desarrollo")
-ALGORITHM = "HS256"
+@router.post("/register", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
+def register(usuario_in: UsuarioCreate, db: Session = Depends(get_db)):
+    usuario_existente = auth_service.obtener_usuario_por_correo(db, usuario_in.correo)
+    if usuario_existente:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Ese correo ya esta registrado",
+        )
+    return auth_service.crear_usuario(db, usuario_in)
 
-# Le dice a FastAPI que busque el token en las cabeceras HTTP (Header: Authorization Bearer <TOKEN>)
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
-def verificar_token(token: str = Depends(oauth2_scheme)) -> dict:
-    
-    """
-    Decodifica el JWT, verifica si es válido o si ya expiró.
-    """
-    try:
-        payload = jwt.decode(token, JWT_SECRET, algorithms=[ALGORITHM])
-        return payload  # Retorna el diccionario con la info encriptada (sub, email, role)
-    except jwt.ExpiredSignatureError:
+@router.post("/login", response_model=TokenResponse)    
+def login(usuario_in: UsuarioLogin, db: Session = Depends(get_db)):
+    usuario = auth_service.autenticar_usuario(db, credenciales.correo, credenciales.password)
+    if usuario is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Su sesión ha expirado. Por favor, inicie sesión nuevamente."
+            detail="Correo o contrasena incorrectos",
         )
-    except jwt.InvalidTokenError:
+    if usuario.estado_usuario.value == "rechazado":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token de autenticación no válido."
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Tu registro fue rechazado, contacta al administrador",
         )
-
-def verificar_rol(roles_permitidos: list):
-    """
-    Filtra el acceso a los endpoints de la API según el rol del usuario de SQLAlchemy.
-    Ejemplo: verificar_rol(["vendedor", "admin"])
-    """
-    def dependencia(payload: dict = Depends(verificar_token)):
-        usuario_rol = payload.get("role")
-        if usuario_rol not in roles_permitidos:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="No posees los permisos necesarios para realizar esta acción."
-            )
-        return payload
-    return dependencia
+ 
+    access_token = auth_service.crear_token_acceso(usuario)
+    return TokenResponse(access_token=access_token)

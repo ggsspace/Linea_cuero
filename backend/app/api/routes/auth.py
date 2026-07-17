@@ -1,47 +1,51 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
-from core.database import get_db
-from core.security import verificar_token
-from schemas.usuario import UsuarioCreate, UsuarioResponse
-from app.services import AuthService  
+from app.core.database import get_db
+from app.core.security import verificar_token
+from app.models.usuario import Usuario, RolUsuario
+
+# Le dice a FastAPI (y a /docs) donde se obtiene el token: en el login.
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
 
-router = APIRouter(prefix="/auth", tags=["Autenticación"])
-
-@router.post("/register", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
-def registrar_usuario(usuario_in: UsuarioCreate, db: Session = Depends(get_db)):
-    usuario_existente = AuthService.obtener_usuario_por_email(db, email=usuario_in.email)
-    if usuario_existente:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="El correo electrónico ya está registrado"
-        )
-    return AuthService.crear_usuario(db, usuario_in)
-
-@router.post("/login")
-def iniciar_sesion(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    usuario = AuthService.autenticar_usuario(db, email=form_data.username, password=form_data.password)
-    if not usuario:
+def get_current_user(
+    token: str = Depends(oauth2_scheme),
+    db: Session = Depends(get_db),
+) -> Usuario:
+    """
+    Dependencia base: cualquier ruta protegida la usa.
+    verificar_token() (en core/security.py) ya lanza 401 si el token
+    esta vencido, alterado o corrupto.
+    """
+    payload = verificar_token(token)
+    id_usuario = payload.get("sub")
+    if id_usuario is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Credenciales incorrectas",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail="Token invalido",
         )
-    
-    token_acceso = AuthService.crear_token_acceso(usuario)
-    return {
-        "access_token": token_acceso,
-        "token_type": "bearer"
-    }
 
-@router.get("/me", response_model=UsuarioResponse)
-def obtener_perfil(usuario_actual: dict = Depends(verificar_token), db: Session = Depends(get_db)):
-    usuario = AuthService.obtener_usuario_por_email(db, email=usuario_actual.get("sub"))
-    if not usuario:
+    usuario = db.query(Usuario).filter(Usuario.id_usuario == int(id_usuario)).first()
+    if usuario is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Usuario no encontrado"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Usuario no encontrado",
         )
     return usuario
+
+
+def require_role(*roles_permitidos: RolUsuario):
+    """
+    Uso: dependencies=[Depends(require_role(RolUsuario.administrador))]
+    Encadena get_current_user y ademas verifica el rol (RBAC).
+    """
+    def wrapper(usuario_actual: Usuario = Depends(get_current_user)) -> Usuario:
+        if usuario_actual.rol_usuario not in roles_permitidos:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="No tienes permiso para realizar esta accion",
+            )
+        return usuario_actual
+    return wrapper
