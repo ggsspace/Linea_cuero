@@ -39,7 +39,7 @@ class UsuarioUpdate(BaseModel):
 
 class UsuarioEstadoUpdate(BaseModel):
     """Para que el admin apruebe o rechace un registro (RF: gestion de estado)."""
-    estado_usuario: EstadoUsuario
+estado_usuario: EstadoUsuario
 
 
 

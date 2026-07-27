@@ -1,51 +1,36 @@
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
+ 
 from app.core.database import get_db
-from app.core.security import verificar_token
-from app.models.usuario import Usuario, RolUsuario
+from app.schemas.usuario import UsuarioCreate, UsuarioLogin, UsuarioResponse, TokenResponse
+from app.services import auth_service
 
-# Le dice a FastAPI (y a /docs) donde se obtiene el token: en el login.
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+router = APIRouter(prefix="/api/auth", tags=["auth"])
 
-
-def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    db: Session = Depends(get_db),
-) -> Usuario:
-    """
-    Dependencia base: cualquier ruta protegida la usa.
-    verificar_token() (en core/security.py) ya lanza 401 si el token
-    esta vencido, alterado o corrupto.
-    """
-    payload = verificar_token(token)
-    id_usuario = payload.get("sub")
-    if id_usuario is None:
+@router.post("/register", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
+def register(usuario_in: UsuarioCreate, db: Session = Depends(get_db)):
+    usuario_existente = auth_service.obtener_usuario_por_correo(db, usuario_in.correo)
+    if usuario_existente:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token invalido",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Ese correo ya esta registrado",
         )
+    return auth_service.crear_usuario(db, usuario_in)
 
-    usuario = db.query(Usuario).filter(Usuario.id_usuario == int(id_usuario)).first()
+
+@router.post("/login", response_model=TokenResponse)    
+def login(usuario_in: UsuarioLogin, db: Session = Depends(get_db)):
+    usuario = auth_service.autenticar_usuario(db, credenciales.correo, credenciales.password)
     if usuario is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Usuario no encontrado",
+            detail="Correo o contrasena incorrectos",
         )
-    return usuario
-
-
-def require_role(*roles_permitidos: RolUsuario):
-    """
-    Uso: dependencies=[Depends(require_role(RolUsuario.administrador))]
-    Encadena get_current_user y ademas verifica el rol (RBAC).
-    """
-    def wrapper(usuario_actual: Usuario = Depends(get_current_user)) -> Usuario:
-        if usuario_actual.rol_usuario not in roles_permitidos:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="No tienes permiso para realizar esta accion",
-            )
-        return usuario_actual
-    return wrapper
+    if usuario.estado_usuario.value == "rechazado":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Tu registro fue rechazado, contacta al administrador",
+        )
+ 
+    access_token = auth_service.crear_token_acceso(usuario)
+    return TokenResponse(access_token=access_token)
